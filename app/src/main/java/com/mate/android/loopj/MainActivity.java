@@ -13,6 +13,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -53,17 +55,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void executeLoopJ(String s){
 
-        requestParams.put("x",s);
+        requestParams.put("s",s);
 
         client.get(BASE_URL,requestParams,new JsonHttpResponseHandler(){
-
-
 
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 jsonResponse = response.toString();
                 Log.i(TAG, "onSuccess: " + jsonResponse);
                 tvResponse.setText(jsonResponse);
+                getMovieTitleFromJsonResponse(response);
             }
 
             @Override
@@ -79,6 +80,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         });
 
+
+    }
+
+    public void getMovieTitleFromJsonResponse(JSONObject jsonResponse) {
+
+        try {
+            JSONArray searchArray = jsonResponse.getJSONArray("Search");
+            JSONObject first = searchArray.getJSONObject(0);
+            String movieTitle = first.getString("Title");
+            tvResponse.setText(movieTitle);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
