@@ -23,6 +23,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
             android:text="Search" />
 
     </LinearLayout>
@@ -32,5 +34,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:hint="search results"/>
+        android:hint="Search Results"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvMovies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        ></android.support.v7.widget.RecyclerView>
 </LinearLayout>
