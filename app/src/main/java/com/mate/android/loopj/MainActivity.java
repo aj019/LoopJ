@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             JSONArray searchArray = jsonResponse.getJSONArray("Search");
+
+
             for(int i=0; i<searchArray.length();i++){
                 JSONObject movie = searchArray.getJSONObject(i);
                 String movieTitle = movie.getString("Title");
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } catch (JSONException e) {
             e.printStackTrace();
+            tvResponse.setText("No Movie Found");
         }
 
     }
